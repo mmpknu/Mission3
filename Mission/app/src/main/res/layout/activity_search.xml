@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".shot"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:textSize="30dp"
+        android:textColor="#ffffff"
+        android:background="#ff8800"
+        android:text="MISSION"
+        android:gravity="center"
+        />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="312dp"
+        android:layout_height="179dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/shot_photo" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:textColor="#000000"
+        android:text="1.사진속에 보이는 장소를 찾아가세요!\n2. 사진 속 동물은 모두 몇마리 일까요?"
+        android:gravity="center"
+        android:textSize="20dp"/>
+
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="Tip : 개와 고양이가 있습니다"
+            android:textColor="#000000"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="76dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_weight="0.1"
+            android:background="#fafafa"
+            app:srcCompat="@drawable/hint"/>
+
+    </FrameLayout>
+
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/botton"
+        android:text="정답 입력하러 가기"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"/>
+
+</LinearLayout>
