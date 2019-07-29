@@ -29,10 +29,10 @@ import java.util.ArrayList;
 
 public class typing2 extends AppCompatActivity {
     //counter
-    public int counter = 180;
+    public int counter = 35;
     public int minute;
     public int second;
-    public int status = 0;
+    public int status = 1;
     public String minute_str;
     public String second_str;
     public String rest_time;
@@ -44,8 +44,8 @@ public class typing2 extends AppCompatActivity {
     ArrayList<EditText> etList;
     int cnt;
 
-    private static final int MILLISINFUTURE = 180*1000;
-    private static final int COUNT_DOWN_INTERVAL = 1000;
+    private int MILLISINFUTURE = counter*1000;
+    private int COUNT_DOWN_INTERVAL = 1000;
     //scroll view
     public ScrollView scrollView = null;
     public LinearLayout linearView = null;
@@ -56,7 +56,7 @@ public class typing2 extends AppCompatActivity {
             "자욱하게 내려앉은 먼지 사이로...\n";
 
     Button button1;
-
+    CountDownTimer countDownTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +68,7 @@ public class typing2 extends AppCompatActivity {
         scrollView = (ScrollView)findViewById(R.id.text_scroll);
         linearView = (LinearLayout)findViewById(R.id.lyric_linear);
 
-        new CountDownTimer(MILLISINFUTURE, COUNT_DOWN_INTERVAL){
+        countDownTimer = new CountDownTimer(MILLISINFUTURE, COUNT_DOWN_INTERVAL){
             @Override
             public void onTick(long l) {
                 minute = counter / 60;
@@ -91,6 +91,8 @@ public class typing2 extends AppCompatActivity {
                 intent.putExtra("next",6);
                 startActivityForResult(intent, 1);*/
             }
+
+
         }.start();
 
         button1=(Button)findViewById(R.id.button1);
@@ -101,7 +103,9 @@ public class typing2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(status == 0){
-                    counter=0;
+
+                    countDownTimer.cancel();
+
                     Intent intent = new Intent(typing2.this, popup.class);
                     intent.putExtra("next",6);
                     startActivityForResult(intent, 1);
@@ -125,6 +129,10 @@ public class typing2 extends AppCompatActivity {
             creat_edit(elem, cnt);
             cnt++;
         }
+        for (EditText elem : etList) {
+            elem.setEnabled(false);
+        }
+        etList.get(0).setEnabled(true);
     }
 
     public void creat_textview(String text){
@@ -140,6 +148,7 @@ public class typing2 extends AppCompatActivity {
     public void creat_edit(final String text, final int num){
         EditText edit = new EditText(this);
         etList.add(edit);
+
         edit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -177,8 +186,14 @@ public class typing2 extends AppCompatActivity {
                         Log.i("numcheck", "text.len "+text.length());
                         Log.i("numcheck", "num+1 "+(num+1));
                         Log.i("numcheck", "cnt "+cnt);
-                        if(text.length() == s.length() && (num+1) < cnt)
-                            etList.get(num+1).requestFocus();
+                        if(text.length() == s.length() && (num+1) < cnt) {
+                            etList.get(num + 1).requestFocus();
+                            etList.get(num).setEnabled(false);
+                            etList.get(num + 1).setEnabled(true);
+                            if(num == cnt){
+                                status = 0;
+                            }
+                        }
                     } else {
                         Log.i("if", "wrong");
                         // wrong
